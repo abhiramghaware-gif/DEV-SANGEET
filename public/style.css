@@ -1,0 +1,577 @@
+/* Step 2 - CSS Aesthetics and Custom Properties */
+:root {
+    --color-bg:        #0d0408;
+    --color-primary:   #FF9800;   /* saffron */
+    --color-gold:      #FFD700;   /* gold */
+    --color-text:      #FFF8E7;   /* warm white */
+    --color-muted:     rgba(255,248,231,0.55);
+    --color-glass:     rgba(255,180,30,0.07);
+    --color-border:    rgba(255,180,0,0.25);
+    --color-glow:      rgba(255,160,0,0.4);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'Inter', 'Lato', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Background Layers */
+.bg-layer {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: -3;
+}
+
+.bg-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to bottom, rgba(13,4,8,0.55) 0%, rgba(13,4,8,0.88) 60%, #0d0408 100%);
+    z-index: -2;
+}
+
+#particles-container {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    color: var(--color-gold);
+    opacity: 0;
+    font-size: 1.2rem;
+    animation: drift 10s linear infinite;
+}
+
+@keyframes drift {
+    0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+    20% { opacity: 0.6; }
+    80% { opacity: 0.6; }
+    100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+}
+
+/* Typography */
+.hindi-title {
+    font-family: 'Tiro Devanagari Hindi', serif;
+    font-size: 3.5rem;
+    background: linear-gradient(to right, var(--color-primary), var(--color-gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.english-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    text-align: center;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Top Bar */
+.top-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: rgba(13,4,8,0.6);
+    border-bottom: 1px solid var(--color-border);
+    z-index: 1000;
+}
+
+.top-left, .top-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.separator {
+    color: var(--color-muted);
+}
+
+.support-btn {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    border: 1px solid var(--color-border);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+
+.support-btn:hover {
+    background: var(--color-glass);
+    border-color: var(--color-gold);
+}
+
+.yt-icon-btn {
+    background: none;
+    border: none;
+    color: var(--color-gold);
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.yt-icon-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Hero Section */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px 40px;
+}
+
+.hero-content {
+    max-width: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Deity Carousel */
+.deity-carousel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.deity-carousel img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--color-gold);
+    box-shadow: 0 0 30px var(--color-glow);
+    animation: haloPulse 3s infinite alternate ease-in-out;
+    transition: opacity 1s ease-in-out;
+}
+
+@keyframes haloPulse {
+    0% { box-shadow: 0 0 20px var(--color-glow); }
+    100% { box-shadow: 0 0 50px var(--color-primary); }
+}
+
+.deity-name {
+    margin-top: 1rem;
+    font-family: 'Cinzel', serif;
+    color: var(--color-gold);
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    transition: opacity 1s ease-in-out;
+}
+
+/* Shloka */
+.shloka-container {
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.shloka-text {
+    font-style: italic;
+    color: var(--color-text);
+    text-align: center;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.shloka-text.fade-out {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.shloka-text.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Main Music Player Card */
+.music-player-card {
+    background: var(--color-glass);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--color-border);
+    border-radius: 24px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 60px rgba(255,140,0,0.1);
+    width: 100%;
+    padding: 2rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.music-player-card.playing {
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 60px var(--color-glow);
+}
+
+.player-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 1.5rem;
+}
+
+.tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--color-muted);
+    padding: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+    font-family: 'Inter', sans-serif;
+}
+
+.tab-btn.active {
+    color: var(--color-gold);
+    border-bottom-color: var(--color-primary);
+}
+
+.tab-pane {
+    display: none;
+    flex-direction: column;
+}
+
+.tab-pane.active {
+    display: flex;
+}
+
+/* Common Player Controls */
+.now-playing-info {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.now-playing-info h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+    color: var(--color-text);
+}
+
+.now-playing-info p {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+}
+
+.progress-container {
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+    cursor: pointer;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    background: var(--color-border);
+    border-radius: 2px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    margin-top: -4px;
+    box-shadow: 0 0 10px var(--color-glow);
+}
+
+.time-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    margin-top: 0.5rem;
+}
+
+.player-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.ctrl-btn {
+    background: none;
+    border: none;
+    color: var(--color-text);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.2s;
+}
+
+.ctrl-btn:hover {
+    color: var(--color-primary);
+    transform: scale(1.1);
+}
+
+.play-pause {
+    font-size: 2.5rem;
+    color: var(--color-gold);
+}
+
+.volume-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 2rem;
+}
+
+.volume-container input {
+    width: 80px;
+}
+
+#yt-player-container {
+    display: none;
+}
+
+/* Local Music Tab Styles */
+.dropzone {
+    border: 2px dashed var(--color-border);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    color: var(--color-muted);
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.dropzone.dragover {
+    border-color: var(--color-gold);
+    background: var(--color-glass);
+    box-shadow: 0 0 20px var(--color-glow);
+}
+
+.upload-spinner {
+    width: 24px; height: 24px;
+    border: 3px solid var(--color-border);
+    border-top: 3px solid var(--color-gold);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 1rem auto 0;
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+.local-playlist {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 1.5rem;
+}
+
+.local-playlist::-webkit-scrollbar { width: 6px; }
+.local-playlist::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+
+.song-row {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.song-row:hover {
+    background: var(--color-glass);
+    border-left: 3px solid var(--color-primary);
+}
+
+.song-row.playing {
+    background: var(--color-glass);
+    border-left: 3px solid var(--color-primary);
+}
+
+.song-row .play-icon { margin-right: 1rem; color: var(--color-gold); }
+.song-row .song-name { flex: 1; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.song-row .song-duration { color: var(--color-muted); font-size: 0.8rem; margin-right: 1rem; }
+.song-row .delete-btn { background: none; border: none; color: #ff4d4d; cursor: pointer; opacity: 0.7; }
+.song-row .delete-btn:hover { opacity: 1; }
+
+.credit-line {
+    text-align: center;
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    margin-top: 2rem;
+}
+
+/* About Section */
+.about-section {
+    background: #0d0408;
+    padding: 60px 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.about-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.eyebrow {
+    color: var(--color-primary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.about-container h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    margin: 1rem 0;
+    color: var(--color-gold);
+}
+
+.lead-text {
+    color: var(--color-muted);
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.feature-card {
+    background: var(--color-glass);
+    border: 1px solid var(--color-border);
+    padding: 2rem;
+    border-radius: 16px;
+    text-align: left;
+    backdrop-filter: blur(10px);
+}
+
+.feature-card h3 {
+    color: var(--color-text);
+    margin-bottom: 1rem;
+}
+
+.feature-card p {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.faq-section {
+    text-align: left;
+    margin-bottom: 4rem;
+}
+
+.faq-section h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: var(--color-gold);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.faq-item {
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 1.5rem;
+}
+
+.faq-item h4 {
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.faq-item p {
+    color: var(--color-muted);
+    line-height: 1.5;
+}
+
+.cta-container {
+    margin-top: 2rem;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-gold));
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--color-glow);
+}
+
+/* Playlist UI Fixes */
+.yt-auth-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+#yt-playlist-selector {
+    width: 100%;
+    text-align: center;
+}
+
+#playlist-select {
+    width: 100%;
+    max-width: 400px;
+    background: rgba(13,4,8,0.8);
+    color: var(--color-gold);
+    border: 1px solid var(--color-border);
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    appearance: none;
+    -webkit-appearance: none;
+    text-align: center;
+}
+
+#playlist-select option {
+    background: var(--color-bg);
+    color: var(--color-text);
+}
