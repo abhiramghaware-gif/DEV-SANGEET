@@ -75,10 +75,17 @@
                                 Sign in with Google to load Playlists
                             </button>
                             <div id="yt-playlist-selector" style="display: none; margin-bottom: 1.5rem;">
-                                <label for="playlist-select" style="color: var(--color-gold); font-family: 'Cinzel', serif;">Select Playlist: </label>
-                                <select id="playlist-select" style="background: var(--color-bg); color: var(--color-text); border: 1px solid var(--color-border); padding: 0.5rem; border-radius: 8px;">
-                                    <option value="default">Default Dev Sangeet Playlist</option>
-                                </select>
+                                <div class="custom-select-wrapper">
+                                    <div class="custom-select" id="custom-playlist-select">
+                                        <div class="custom-select-trigger">
+                                            <span class="custom-select-text">Default Dev Sangeet Playlist</span>
+                                            <div class="arrow"></div>
+                                        </div>
+                                        <div class="custom-options" id="custom-playlist-options">
+                                            <span class="custom-option selected" data-value="default">Default Dev Sangeet Playlist</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

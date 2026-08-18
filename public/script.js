@@ -148,28 +148,59 @@ async function fetchYouTubePlaylists() {
             headers: { 'Authorization': `Bearer ${accessToken}` }
         });
         const data = await res.json();
-        const select = document.getElementById('playlist-select');
+        const optionsContainer = document.getElementById('custom-playlist-options');
         
         if (data.items) {
             data.items.forEach(playlist => {
-                const option = document.createElement('option');
-                option.value = playlist.id;
+                const option = document.createElement('span');
+                option.className = 'custom-option';
+                option.setAttribute('data-value', playlist.id);
                 option.textContent = playlist.snippet.title;
-                select.appendChild(option);
+                optionsContainer.appendChild(option);
             });
+            setupCustomDropdown();
         }
     } catch(e) {
         console.error("Failed to fetch playlists:", e);
     }
 }
 
-document.getElementById('playlist-select').addEventListener('change', async (e) => {
-    if(e.target.value === 'default') {
-        // Handle default reset if needed (or ignore)
-        return;
-    }
-    await fetchVideosFromPlaylist(e.target.value);
-});
+function setupCustomDropdown() {
+    const customSelect = document.getElementById('custom-playlist-select');
+    const selectTrigger = customSelect.querySelector('.custom-select-trigger');
+    const selectText = customSelect.querySelector('.custom-select-text');
+    const options = customSelect.querySelectorAll('.custom-option');
+
+    // Toggle dropdown
+    selectTrigger.addEventListener('click', () => {
+        customSelect.classList.toggle('open');
+    });
+
+    // Close when clicking outside
+    window.addEventListener('click', (e) => {
+        if (!customSelect.contains(e.target)) {
+            customSelect.classList.remove('open');
+        }
+    });
+
+    // Option click logic
+    options.forEach(option => {
+        option.addEventListener('click', async function() {
+            if (!this.classList.contains('selected')) {
+                // Remove selected from siblings
+                options.forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                selectText.textContent = this.textContent;
+                
+                const val = this.getAttribute('data-value');
+                if(val !== 'default') {
+                    await fetchVideosFromPlaylist(val);
+                }
+            }
+            customSelect.classList.remove('open');
+        });
+    });
+}
 
 async function fetchVideosFromPlaylist(playlistId) {
     if (!accessToken) return;
