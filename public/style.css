@@ -27,6 +27,9 @@ body {
     font-family: 'Inter', 'Segoe UI', sans-serif;
     overflow-x: hidden;
     line-height: 1.6;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    overscroll-behavior-y: none;
 }
 
 /* Background Layers */
@@ -161,6 +164,7 @@ body {
 /* Hero Section */
 .hero-section {
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -796,4 +800,118 @@ input[type=range]::-webkit-slider-thumb:hover {
 }
 .custom-select.open .arrow {
     transform: rotate(225deg) translate(-2px, -2px);
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+    :root {
+        --radius-lg: 20px;
+    }
+
+    .top-bar {
+        padding: 0.8rem 1.2rem;
+    }
+
+    .top-left .separator,
+    .top-left .devotees-count {
+        display: none;
+    }
+
+    .hindi-title {
+        font-size: 2.2rem;
+    }
+
+    .english-subtitle {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+        margin-bottom: 2rem;
+    }
+
+    .deity-carousel img {
+        width: 140px;
+        height: 140px;
+    }
+
+    .deity-name {
+        font-size: 1.1rem;
+        margin-top: 1rem;
+    }
+
+    .shloka-container {
+        margin-bottom: 1.5rem;
+        height: auto;
+    }
+
+    .shloka-text {
+        font-size: 0.95rem;
+    }
+
+    .music-player-card {
+        padding: 1.2rem;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .player-tabs {
+        margin-bottom: 1.5rem;
+    }
+
+    .tab-btn {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+    }
+
+    .now-playing-info h3 {
+        font-size: 1.2rem;
+    }
+
+    .play-pause {
+        width: 56px;
+        height: 56px;
+        font-size: 1.5rem;
+    }
+
+    .player-controls {
+        gap: 1.2rem;
+    }
+
+    .volume-container {
+        display: none; /* Hide volume on mobile to save space, usually handled by device buttons */
+    }
+
+    .about-section {
+        padding: 40px 15px;
+    }
+
+    .about-container h2 {
+        font-size: 2rem;
+    }
+
+    .lead-text {
+        font-size: 1rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .feature-card {
+        padding: 1.5rem;
+    }
+
+    .faq-section {
+        padding: 1.5rem;
+    }
+
+    .faq-section h3 {
+        font-size: 1.8rem;
+    }
+
+    .cta-button {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        width: 100%;
+    }
 }
